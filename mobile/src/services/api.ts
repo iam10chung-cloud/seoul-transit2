@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { API_BASE_URL } from '@env';
-import { RoutesRequest, RoutesResponse, HealthResponse } from '../types/api';
+import { 
+  RoutesRequest, 
+  RoutesResponse, 
+  HealthResponse,
+  AccessibleRoutesRequest,
+  AccessibleRoutesResponse,
+} from '../types/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL || 'http://localhost:8080',
@@ -43,9 +49,25 @@ export const apiService = {
     return response.data;
   },
 
-  // Get routes
-  getRoutes: async (request: RoutesRequest): Promise<RoutesResponse> => {
-    const response = await api.post<RoutesResponse>('/v1/routes', request);
+  // Get routes (with accessibility support)
+  getRoutes: async (request: RoutesRequest | AccessibleRoutesRequest): Promise<AccessibleRoutesResponse> => {
+    const response = await api.post<AccessibleRoutesResponse>('/v1/routes', request);
+    return response.data;
+  },
+
+  // Get station accessibility info
+  getStationAccessibility: async (stationId: string) => {
+    const response = await api.get(`/v1/accessibility/stations/${stationId}`);
+    return response.data;
+  },
+
+  // Get all accessible stations
+  getAllAccessibleStations: async (filters?: { wheelchairOnly?: boolean; elevatorOnly?: boolean }) => {
+    const params = new URLSearchParams();
+    if (filters?.wheelchairOnly) params.append('wheelchairOnly', 'true');
+    if (filters?.elevatorOnly) params.append('elevatorOnly', 'true');
+    
+    const response = await api.get(`/v1/accessibility/stations?${params.toString()}`);
     return response.data;
   },
 };

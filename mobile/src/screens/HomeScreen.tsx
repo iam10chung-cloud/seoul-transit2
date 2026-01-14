@@ -12,10 +12,12 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { RoutePreference } from '../types/api';
 import { apiService } from '../services/api';
+import { useAccessibility } from '../contexts/AccessibilityContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
+  const { profile, voiceGuidanceEnabled, isAccessibilityEnabled } = useAccessibility();
   const [startLat, setStartLat] = useState('37.498095'); // Gangnam Station default
   const [startLng, setStartLng] = useState('127.027610');
   const [destLat, setDestLat] = useState('37.554648'); // Seoul Station default
@@ -42,6 +44,8 @@ export default function HomeScreen({ navigation }: Props) {
         origin: { lat: originLat, lng: originLng },
         destination: { lat: destLatNum, lng: destLngNum },
         preference,
+        accessibilityProfile: profile || undefined,
+        includeVoiceGuidance: voiceGuidanceEnabled,
       });
 
       setLoading(false);
@@ -169,6 +173,19 @@ export default function HomeScreen({ navigation }: Props) {
         </Text>
         <Text style={styles.infoText}>Map pin selection coming in next version</Text>
       </View>
+
+      {isAccessibilityEnabled && (
+        <View style={styles.accessibilityBanner}>
+          <Text style={styles.accessibilityBannerText}>
+            ♿ Accessibility Mode: ON
+          </Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('AccessibilitySettings' as any)}
+          >
+            <Text style={styles.settingsLink}>Edit Settings</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -274,5 +291,27 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#92400e',
     marginBottom: 4,
+  },
+  accessibilityBanner: {
+    marginTop: 16,
+    backgroundColor: '#e0f2fe',
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#0284c7',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  accessibilityBannerText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#0369a1',
+  },
+  settingsLink: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#0369a1',
+    textDecorationLine: 'underline',
   },
 });
