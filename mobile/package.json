@@ -9,6 +9,7 @@
     "ios": "expo start --ios",
     "web": "HOST=0.0.0.0 expo start --web --host 0.0.0.0",
     "web-windows": "set HOST=0.0.0.0&& expo start --web --host 0.0.0.0",
+    "build:web": "expo export:web",
     "clean": "rm -rf node_modules && npm cache clean --force && npm install"
   },
   "dependencies": {
