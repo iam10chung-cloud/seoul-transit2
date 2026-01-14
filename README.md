@@ -2,6 +2,13 @@
 
 A mobile-first public transit route finder for Seoul with real-time arrivals.
 
+## 📖 Documentation
+
+- 🇰🇷 **[한국어 빠른 시작 가이드](QUICKSTART_KR.md)** - 5분 안에 시작하기
+- 🇰🇷 **[한국어 사용 매뉴얼](docs/USER_MANUAL_KR.md)** - 상세 설명서
+- 🇺🇸 **[English Quick Start](BUILD_SUMMARY.md)** - Complete guide
+- 📚 **[Full Documentation](docs/)** - Architecture, API specs, roadmap
+
 ## Project Structure
 
 ```
