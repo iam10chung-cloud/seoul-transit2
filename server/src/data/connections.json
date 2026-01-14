@@ -1,0 +1,50 @@
+[
+  {
+    "from": "2_gangnam",
+    "to": "2_samsung",
+    "duration_seconds": 180,
+    "distance_meters": 2100
+  },
+  {
+    "from": "2_samsung",
+    "to": "2_jamsil",
+    "duration_seconds": 240,
+    "distance_meters": 3500
+  },
+  {
+    "from": "2_jamsil",
+    "to": "2_sindang",
+    "duration_seconds": 480,
+    "distance_meters": 7000
+  },
+  {
+    "from": "2_sindang",
+    "to": "2_seoul_station",
+    "duration_seconds": 420,
+    "distance_meters": 6000
+  },
+  {
+    "from": "2_seoul_station",
+    "to": "2_hongik",
+    "duration_seconds": 360,
+    "distance_meters": 5500
+  },
+  {
+    "from": "3_gangnam",
+    "to": "3_sinsa",
+    "duration_seconds": 150,
+    "distance_meters": 1800
+  },
+  {
+    "from": "3_sinsa",
+    "to": "3_anguk",
+    "duration_seconds": 600,
+    "distance_meters": 8500
+  },
+  {
+    "from": "3_anguk",
+    "to": "3_gyeongbokgung",
+    "duration_seconds": 120,
+    "distance_meters": 1200
+  }
+]

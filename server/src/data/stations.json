@@ -1,0 +1,82 @@
+[
+  {
+    "id": "2_gangnam",
+    "name": "강남역",
+    "name_en": "Gangnam",
+    "line": "2",
+    "lat": 37.498095,
+    "lng": 127.027610
+  },
+  {
+    "id": "2_samsung",
+    "name": "삼성역",
+    "name_en": "Samsung",
+    "line": "2",
+    "lat": 37.508530,
+    "lng": 127.063770
+  },
+  {
+    "id": "2_jamsil",
+    "name": "잠실역",
+    "name_en": "Jamsil",
+    "line": "2",
+    "lat": 37.513294,
+    "lng": 127.100388
+  },
+  {
+    "id": "2_sindang",
+    "name": "신당역",
+    "name_en": "Sindang",
+    "line": "2",
+    "lat": 37.566337,
+    "lng": 127.017762
+  },
+  {
+    "id": "2_seoul_station",
+    "name": "서울역",
+    "name_en": "Seoul Station",
+    "line": "2",
+    "lat": 37.554648,
+    "lng": 126.970730
+  },
+  {
+    "id": "2_hongik",
+    "name": "홍대입구역",
+    "name_en": "Hongik University",
+    "line": "2",
+    "lat": 37.557192,
+    "lng": 126.925381
+  },
+  {
+    "id": "3_gangnam",
+    "name": "강남역",
+    "name_en": "Gangnam",
+    "line": "3",
+    "lat": 37.498095,
+    "lng": 127.027610
+  },
+  {
+    "id": "3_sinsa",
+    "name": "신사역",
+    "name_en": "Sinsa",
+    "line": "3",
+    "lat": 37.516181,
+    "lng": 127.019711
+  },
+  {
+    "id": "3_anguk",
+    "name": "안국역",
+    "name_en": "Anguk",
+    "line": "3",
+    "lat": 37.576074,
+    "lng": 126.985641
+  },
+  {
+    "id": "3_gyeongbokgung",
+    "name": "경복궁역",
+    "name_en": "Gyeongbokgung",
+    "line": "3",
+    "lat": 37.575331,
+    "lng": 126.973071
+  }
+]
