@@ -1,7 +1,14 @@
 import { Request, Response } from 'express';
-import { RoutesRequest, RoutesResponse, RoutePreference } from '../types/api';
+import {
+  RoutesRequest,
+  RoutesResponse,
+  RoutePreference,
+  AccessibleRoutesRequest,
+  AccessibleRoutesResponse,
+} from '../types/api';
 import { logger } from '../utils/logger';
 import { TransitGraph } from '../services/graph';
+import { accessibilityService } from '../services/accessibility';
 import stationsData from '../data/stations.json';
 import connectionsData from '../data/connections.json';
 
@@ -10,7 +17,7 @@ const transitGraph = new TransitGraph(stationsData, connectionsData);
 
 export const postRoutes = (req: Request, res: Response) => {
   try {
-    const body: RoutesRequest = req.body;
+    const body: AccessibleRoutesRequest = req.body;
 
     // Validate request
     if (!body.origin || !body.destination) {
@@ -91,14 +98,51 @@ export const postRoutes = (req: Request, res: Response) => {
       };
     });
 
+    // Filter routes based on accessibility profile
+    const accessibilityProfile = body.accessibilityProfile;
+    const includeVoiceGuidance = body.includeVoiceGuidance ?? false;
+    
+    let filteredRoutes = routes;
+    let filteredCount = 0;
+    
+    if (accessibilityProfile) {
+      const originalCount = routes.length;
+      filteredRoutes = routes.filter((route) =>
+        accessibilityService.isRouteAccessible(route, accessibilityProfile)
+      );
+      filteredCount = originalCount - filteredRoutes.length;
+      
+      logger.info('Accessibility filtering applied', {
+        originalCount,
+        filteredCount,
+        remainingCount: filteredRoutes.length,
+      });
+    }
+    
+    // Enhance routes with accessibility information
+    const accessibleRoutes = filteredRoutes.map((route) =>
+      accessibilityService.enhanceRouteWithAccessibility(
+        route,
+        accessibilityProfile,
+        includeVoiceGuidance
+      )
+    );
+    
+    // Sort by accessibility score if profile is provided
+    if (accessibilityProfile) {
+      accessibleRoutes.sort((a, b) => b.accessibilityScore.overall - a.accessibilityScore.overall);
+    }
+
     // Fallback to mock if no routes found
-    const response: RoutesResponse = routes.length > 0 ? {
-      routes,
+    const response: AccessibleRoutesResponse = accessibleRoutes.length > 0 ? {
+      routes: accessibleRoutes,
       metadata: {
         requestTime: new Date().toISOString(),
         preference,
         realtimeAvailable: false,
         fallbackMode: false,
+        accessibilityFilterApplied: !!accessibilityProfile,
+        filteredRoutesCount: filteredCount,
       },
     } : {
       routes: [
@@ -239,8 +283,21 @@ export const postRoutes = (req: Request, res: Response) => {
         preference,
         realtimeAvailable: true,
         fallbackMode: false,
+        accessibilityFilterApplied: false,
+        filteredRoutesCount: 0,
       },
     };
+    
+    // Enhance fallback routes if using mock data
+    if (accessibleRoutes.length === 0 && response.routes.length > 0) {
+      response.routes = response.routes.map((route) =>
+        accessibilityService.enhanceRouteWithAccessibility(
+          route,
+          accessibilityProfile,
+          includeVoiceGuidance
+        )
+      );
+    }
 
     res.json(response);
   } catch (error) {

@@ -1,9 +1,49 @@
-# Seoul Transit-Only Personal Route Finder (MVP)
+# 🦽 Seoul Accessible Transit
 
-A mobile-first public transit route finder for Seoul with real-time arrivals.
+**Making Seoul's public transportation accessible for everyone.**
+
+A comprehensive, accessibility-focused transit app designed to help people with disabilities navigate Seoul's public transportation system with confidence and independence.
+
+## 🎯 Mission
+
+To empower Seoul's 2.5+ million residents with disabilities by providing accessible, reliable, and easy-to-use public transit navigation.
+
+## ✨ Accessibility Features
+
+### ♿ Wheelchair Users
+- Step-free route planning
+- Real-time elevator status
+- Low-floor bus (저상버스) tracking
+- Platform gap warnings
+- Accessible restroom locations
+
+### 👁️ Visually Impaired
+- Turn-by-turn voice guidance
+- Tactile paving information
+- Braille signage availability
+- High-contrast mode
+- Screen reader optimized
+
+### 👂 Hearing Impaired
+- Visual display information
+- Induction loop availability
+- Text-based alerts
+
+### 🧠 Cognitive Disabilities
+- Easy Mode with simplified interface
+- Picture-based instructions
+- Practice mode (rehearse routes)
+- Companion alert system
+- Extra time buffers
+
+### 👴 Elderly Users
+- Shorter walking distances
+- Fewer transfers
+- Extra transfer time
 
 ## 📖 Documentation
 
+- 🦽 **[Accessibility Guide](docs/ACCESSIBILITY.md)** - Comprehensive accessibility features
 - 🇰🇷 **[한국어 빠른 시작 가이드](QUICKSTART_KR.md)** - 5분 안에 시작하기
 - 🇰🇷 **[한국어 사용 매뉴얼](docs/USER_MANUAL_KR.md)** - 상세 설명서
 - 🇺🇸 **[English Quick Start](BUILD_SUMMARY.md)** - Complete guide
