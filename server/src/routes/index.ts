@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getHealth } from './routes/health';
-import { postRoutes } from './routes/routes';
-import { getRealtimeStatus } from './routes/realtime';
+import { getHealth } from './health';
+import { postRoutes } from './routes';
+import { getRealtimeStatus } from './realtime';
 
 const router = Router();
 
